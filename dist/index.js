@@ -12682,11 +12682,13 @@ const runAll = async (tests, cwd) => {
     log(`::${token}::`);
     if (failed) {
         // We need a good failure experience
+        log('');
+        log(' Whump Whump! ');
+        log('');
     }
     else {
         log('');
         log(color.green('All tests passed'));
-        log('');
         log('✨🌟💖💎🦄💎💖🌟✨🌟💖💎🦄💎💖🌟✨');
         log('');
     }
