@@ -247,18 +247,18 @@ export const runAll = async (tests: Array<Test>, cwd: string): Promise<void> => 
 
   if (failed) {
     // We need a good failure experience
-  } else {
-    log('')
-    log(color.green('All tests passed'))
     log('')
     log(' |\_/|                      ')
-    log(' | @ @   Woof!              ')
+    log(' | @ @   Whump Whump!       ')
     log(' |   <>              _      ')
     log(' |  _/\------____ ((| |))   ')
     log(' |               `--' |     ')
     log(' ____|_       ___|   |___.' ')
     log('/_/_____/____/_______|      ')
-    //log('✨🌟💖💎🦄💎💖🌟✨🌟💖💎🦄💎💖🌟✨')
+  } else {
+    log('')
+    log(color.green('All tests passed'))
+    log('✨🌟💖💎🦄💎💖🌟✨🌟💖💎🦄💎💖🌟✨')
     log('')
   }
 
