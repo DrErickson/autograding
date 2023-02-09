@@ -250,7 +250,6 @@ export const runAll = async (tests: Array<Test>, cwd: string): Promise<void> => 
     // We need a good failure experience
     log('')
     log(color.red('Oh noes!  Some tests failed!'))
-    log(color.red('YOU SHALL NOT PASS!!'))
     log('')
   } else {
     log('')
