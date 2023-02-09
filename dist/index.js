@@ -12679,11 +12679,13 @@ const runAll = async (tests, cwd) => {
     }
     // Restart command processing
     log('');
+    log('Finished testing');
     log(`::${token}::`);
     if (failed) {
         // We need a good failure experience
         log('');
-        log(' Whump Whump! ');
+        log(color.red('Oh noes!  Some tests failed!'));
+        log(color.red('YOU SHALL NOT PASS!!'));
         log('');
     }
     else {
