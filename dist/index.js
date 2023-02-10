@@ -12621,8 +12621,8 @@ const runCommand = async (test, cwd, timeout) => {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
             if (actualLine == expectedLine) {
-                log(color.green(`Line ` + i + `\tExpected: "` + expectedLine + `"`));
-                log(color.green(`Line ` + i + `\t  Actual: "` + actualLine + `"`));
+                log(color.green(`Line ` + i + `\tExpected: "` + expectedLine + `\\n"`));
+                log(color.green(`Line ` + i + `\t  Actual: "` + actualLine + `\\n"`));
             }
             else {
                 log(color.red(`------- Mismatch on line ` + i));
@@ -12658,13 +12658,13 @@ const runCommand = async (test, cwd, timeout) => {
             log(``);
             log(color.red(`Your program is missing output.`));
             log(``);
-            log(color.red(`Missing output: ` + linesExpected[i]));
+            log(color.red(`Missing output: "` + linesExpected[i] + `"`));
         }
         else if (linesActual.length > linesExpected.length) {
             log(``);
             log(color.red(`Extra output found in your program output.`));
             log(``);
-            log(color.red(`Extra output: ` + linesActual[i]));
+            log(color.red(`Extra output: "` + linesActual[i] + `"`));
         }
     };
     switch (test.comparison) {
