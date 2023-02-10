@@ -12651,7 +12651,7 @@ const runCommand = async (test, cwd, timeout) => {
                 log(color.red(`invisible whitespace such as a tab or newline. Highlighting`));
                 log(color.red(`and/or copying each line could help you figure out if there`));
                 log(color.red(`are hidden whitespace characters.`));
-                break;
+                return;
             }
         }
         if (linesActual.length < linesExpected.length) {
