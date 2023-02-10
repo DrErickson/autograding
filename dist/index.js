@@ -12620,8 +12620,8 @@ const runCommand = async (test, cwd, timeout) => {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
             if (actualLine == expectedLine) {
-                log(color.green(`Line ` + i + `\tExpected: ` + expectedLine));
-                log(color.green(`Line ` + i + `\t  Actual: ` + actualLine));
+                log(color.green(`Line ` + i + `\tExpected: "` + expectedLine + `"`));
+                log(color.green(`Line ` + i + `\t  Actual: "` + actualLine + `"`));
             }
             else {
                 log(color.red(`------- Mismatch on line ` + i));
