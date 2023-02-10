@@ -166,9 +166,9 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
   const actual = normalizeLineEndings(output)
 
   const diffMessage = (actual: string, expected: string): void => {
-    let linesActual = actual.split(/\r?\n/)
-    let linesExpected = expected.split(/\r?\n/)
-    let minLines = Math.min(linesActual.length, linesExpected.length)
+    const linesActual = actual.split(/\r?\n/)
+    const linesExpected = expected.split(/\r?\n/)
+    const minLines = Math.min(linesActual.length, linesExpected.length)
 
     log(``)
     log(`Num lines expected ` + linesExpected.length)
@@ -181,8 +181,8 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
 
     log(``)
     // Look at each line
-    for (var i = 0; i < minLines; i++) {
-
+    let i
+    for (i = 0; i < minLines; i++) {
       expectedLine = linesExpected[i]
       actualLine = linesActual[i]
 
@@ -202,34 +202,34 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
           }
         }
 
-        let diffLine = diff.join('')
-        log(``);
-        log(color.red(`EXPECTED: "` + expectedLine + `"`));
-        log(color.red(`  ACTUAL: "` + actualLine + `"`));
-        log(color.red(`           ` + diffLine));
-        log(``);
+        const diffLine = diff.join('')
+        log(``)
+        log(color.red(`EXPECTED: "` + expectedLine + `"`))
+        log(color.red(`  ACTUAL: "` + actualLine + `"`))
+        log(color.red(`           ` + diffLine))
+        log(``)
         if (expectedLine.length >= actualLine.length) {
-          log(color.red(`Character '` + cActual + `' does not match expected character '` + cExpected + `'`));
-          log(``);
+          log(color.red(`Character '` + cActual + `' does not match expected character '` + cExpected + `'`))
+          log(``)
         }
-        log(color.red(`Note: If both lines look the same, then it could be the an`));
-        log(color.red(`invisible whitespace such as a tab or newline. Highlighting`));
-        log(color.red(`and/or copying each line could help you figure out if there`));
-        log(color.red(`are hidden whitespace characters.`));
+        log(color.red(`Note: If both lines look the same, then it could be the an`))
+        log(color.red(`invisible whitespace such as a tab or newline. Highlighting`))
+        log(color.red(`and/or copying each line could help you figure out if there`))
+        log(color.red(`are hidden whitespace characters.`))
         return;
       }
     }
 
     if (linesActual.length < linesExpected.length) {
       log(``)
-      log(color.red(`Your program is missing output.`));
+      log(color.red(`Your program is missing output.`))
       log(``)
-      log(color.red(`Missing output: "` + linesExpected[i] + `"`));
+      log(color.red(`Missing output: "` + linesExpected[i] + `"`))
     } else if (linesActual.length > linesExpected.length) {
       log(``)
-      log(color.red(`Extra output found in your program output.`));
+      log(color.red(`Extra output found in your program output.`))
       log(``)
-      log(color.red(`Extra output: "` + linesActual[i] + `"`));
+      log(color.red(`Extra output: "` + linesActual[i] + `"`))
     }
   }
 
