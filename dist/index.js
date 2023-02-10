@@ -12627,7 +12627,7 @@ const runCommand = async (test, cwd, timeout) => {
             else {
                 log(color.red(`------- Mismatch on line ` + i));
                 const diff = [...expectedLine];
-                for (let j = 0; i < expectedLine.length; j++) {
+                for (let j = 0; j < expectedLine.length; j++) {
                     if (actualLine[j] != expectedLine[j]) {
                         cActual = actualLine[j];
                         cExpected = expectedLine[j];
