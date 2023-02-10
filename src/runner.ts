@@ -157,7 +157,7 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
 
   await waitForExit(child, timeout)
 
-  // Eventually work off the the test type
+  // Eventually work off the test type
   if ((!test.output || test.output == '') && (!test.input || test.input == '')) {
     return
   }
@@ -165,10 +165,58 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
   const expected = normalizeLineEndings(test.output || '')
   const actual = normalizeLineEndings(output)
 
+  const diffMessage = (actual: string, expected: string): void => {
+    let linesActual = actual.split(/\r?\n/)
+    let linesExpected = expected.split(/\r?\n/)
+    let maxLines = Math.max(linesActual.length, linesExpected.length)
+
+    let cActual = ``
+    let cExpected = ``
+    let expectedLine = ``
+    let actualLine = ``
+
+    // Look at each line
+    for (let i = 0; i < maxLines; i++) {
+
+      expectedLine = linesExpected[i]
+      actualLine =  linesActual[i]
+
+      if (actualLine != expectedLine) {
+
+        const diff = [...expectedLine];
+        for (let j = 0; i < expectedLine.length; j++) {
+          if (actualLine[j] != expectedLine[j]) {
+            cActual = actualLine[j]
+            cExpected = expectedLine[j]
+            diff[j] = `^`
+          } else {
+            diff[j] = `_`
+          }
+        }
+
+        let diffLine = diff.join('')
+        log(color.red(`EXPECTED: "` + expectedLine + `"`));
+        log(color.red(`  ACTUAL: "` + actualLine + `"`));
+        log(color.red(`           ` + diffLine));
+        log(``);
+        if (expectedLine.length >= actualLine.length) {
+          log(color.red(`Character ` + cActual + ` does not match expected character ` + cExpected));
+          log(``);
+        }
+        log(color.red(`Note: If both lines look the same, then it could be the an`));
+        log(color.red(`invisible whitespace such as a tab or newline. Highlighting`));
+        log(color.red(`and/or copying each line could help you figure out if there`));
+        log(color.red(`are hidden whitespace characters.`));
+      }
+    }
+  }
+
   switch (test.comparison) {
     case 'exact':
       if (actual != expected) {
-        throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual)
+        diffMessage(actual, expected)
+        throw new TestError(`Output does not match`)
+        // throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual)
       }
       break
     case 'regex':
