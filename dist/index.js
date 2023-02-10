@@ -12608,15 +12608,16 @@ const runCommand = async (test, cwd, timeout) => {
         let linesActual = actual.split(/\r?\n/);
         let linesExpected = expected.split(/\r?\n/);
         let minLines = Math.min(linesActual.length, linesExpected.length);
+        log(``);
         log(`Num lines expected ` + linesExpected.length);
-        log(`Num lines actual ` + linesActual.length);
+        log(`  Num lines actual ` + linesActual.length);
         let cActual = ``;
         let cExpected = ``;
         let expectedLine = ``;
         let actualLine = ``;
         log(``);
         // Look at each line
-        for (let i = 0; i < minLines; i++) {
+        for (var i = 0; i < minLines; i++) {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
             if (actualLine == expectedLine) {
@@ -12650,19 +12651,20 @@ const runCommand = async (test, cwd, timeout) => {
                 log(color.red(`invisible whitespace such as a tab or newline. Highlighting`));
                 log(color.red(`and/or copying each line could help you figure out if there`));
                 log(color.red(`are hidden whitespace characters.`));
+                break;
             }
         }
         if (linesActual.length < linesExpected.length) {
             log(``);
             log(color.red(`Your program is missing output.`));
             log(``);
-            log(color.red(`Missing output: ` + expectedLine));
+            log(color.red(`Missing output: ` + linesExpected[i]));
         }
-        else {
+        else if (linesActual.length > linesExpected.length) {
             log(``);
             log(color.red(`Extra output found in your program output.`));
             log(``);
-            log(color.red(`Extra output: ` + actualLine));
+            log(color.red(`Extra output: ` + linesActual[i]));
         }
     };
     switch (test.comparison) {
