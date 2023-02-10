@@ -12619,11 +12619,12 @@ const runCommand = async (test, cwd, timeout) => {
         for (let i = 0; i < minLines; i++) {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
-            log(`Checking the following lines`);
-            log(`Expected: ` + expectedLine);
-            log(`  Actual: ` + actualLine);
-            if (actualLine != expectedLine) {
-                log(`<------------- The lines are different!`);
+            if (actualLine == expectedLine) {
+                log(color.green(`Line ` + i + `\tExpected: ` + expectedLine));
+                log(color.green(`Line ` + i + `\t  Actual: ` + actualLine));
+            }
+            else {
+                log(color.red(`------- Mismatch on line ` + i));
                 const diff = [...expectedLine];
                 for (let j = 0; i < expectedLine.length; j++) {
                     if (actualLine[j] != expectedLine[j]) {
@@ -12650,6 +12651,18 @@ const runCommand = async (test, cwd, timeout) => {
                 log(color.red(`and/or copying each line could help you figure out if there`));
                 log(color.red(`are hidden whitespace characters.`));
             }
+        }
+        if (linesActual.length < linesExpected.length) {
+            log(``);
+            log(color.red(`Your program is missing output.`));
+            log(``);
+            log(color.red(`Missing output: ` + expectedLine));
+        }
+        else {
+            log(``);
+            log(color.red(`Extra output found in your program output.`));
+            log(``);
+            log(color.red(`Extra output: ` + actualLine));
         }
     };
     switch (test.comparison) {
