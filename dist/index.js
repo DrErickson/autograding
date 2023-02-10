@@ -12644,7 +12644,7 @@ const runCommand = async (test, cwd, timeout) => {
                 log(color.red(`           ` + diffLine));
                 log(``);
                 if (expectedLine.length >= actualLine.length) {
-                    log(color.red(`Character ` + cActual + ` does not match expected character ` + cExpected));
+                    log(color.red(`Character '` + cActual + `' does not match expected character '` + cExpected + `'`));
                     log(``);
                 }
                 log(color.red(`Note: If both lines look the same, then it could be the an`));
