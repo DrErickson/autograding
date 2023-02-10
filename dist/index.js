@@ -12612,11 +12612,16 @@ const runCommand = async (test, cwd, timeout) => {
         let cExpected = ``;
         let expectedLine = ``;
         let actualLine = ``;
+        log(``);
         // Look at each line
         for (let i = 0; i < maxLines; i++) {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
+            log(`Checking the following lines`);
+            log(expectedLine);
+            log(actualLine);
             if (actualLine != expectedLine) {
+                log(`<------------- The lines are different!`);
                 const diff = [...expectedLine];
                 for (let j = 0; i < expectedLine.length; j++) {
                     if (actualLine[j] != expectedLine[j]) {
@@ -12629,6 +12634,7 @@ const runCommand = async (test, cwd, timeout) => {
                     }
                 }
                 let diffLine = diff.join('');
+                log(``);
                 log(color.red(`EXPECTED: "` + expectedLine + `"`));
                 log(color.red(`  ACTUAL: "` + actualLine + `"`));
                 log(color.red(`           ` + diffLine));
