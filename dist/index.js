@@ -12607,7 +12607,7 @@ const runCommand = async (test, cwd, timeout) => {
     const diffMessage = (actual, expected) => {
         let linesActual = actual.split(/\r?\n/);
         let linesExpected = expected.split(/\r?\n/);
-        let maxLines = Math.max(linesActual.length, linesExpected.length);
+        let minLines = Math.min(linesActual.length, linesExpected.length);
         log(`Num lines expected ` + linesExpected.length);
         log(`Num lines actual ` + linesActual.length);
         let cActual = ``;
@@ -12616,7 +12616,7 @@ const runCommand = async (test, cwd, timeout) => {
         let actualLine = ``;
         log(``);
         // Look at each line
-        for (let i = 0; i < maxLines; i++) {
+        for (let i = 0; i < minLines; i++) {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
             log(`Checking the following lines`);
