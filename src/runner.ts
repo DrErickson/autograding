@@ -191,14 +191,14 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
         log(color.green(`Line ` + i + `\t  Actual: "` + actualLine + `\\n"`))
       } else {
         log(color.red(`------- Mismatch on line ` + i))
-        const diff = [...expectedLine];
+        const diff = [...expectedLine]
         for (let j = 0; j < expectedLine.length; j++) {
           if (actualLine[j] != expectedLine[j]) {
-            cActual = actualLine[j];
-            cExpected = expectedLine[j];
-            diff[j] = `^`;
+            cActual = actualLine[j]
+            cExpected = expectedLine[j]
+            diff[j] = `^`
           } else {
-            diff[j] = `_`;
+            diff[j] = `_`
           }
         }
 
@@ -216,7 +216,7 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
         log(color.red(`invisible whitespace such as a tab or newline. Highlighting`))
         log(color.red(`and/or copying each line could help you figure out if there`))
         log(color.red(`are hidden whitespace characters.`))
-        return;
+        return
       }
     }
 
