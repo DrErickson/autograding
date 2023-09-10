@@ -250,7 +250,9 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
     default:
       // The default comparison mode is 'included'
       if (!actual.includes(expected)) {
-        throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual)
+        diffMessage(actual, expected)
+        throw new TestError(`Output does not match`)
+        // throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual)
       }
       break
   }
