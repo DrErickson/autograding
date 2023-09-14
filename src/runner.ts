@@ -171,9 +171,13 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
     const minLines = Math.min(linesActual.length, linesExpected.length)
 
     log(``)
-    log(`Num lines expected ` + linesExpected.length)
-    log(`  Num lines actual ` + linesActual.length)
-
+    if (linesExpected.length == linesActual.length) {
+      log(color.green(`Num lines expected ` + linesExpected.length))
+      log(color.green(`  Num lines actual ` + linesActual.length))
+    } else {
+      log(color.red(`Num lines expected ` + linesExpected.length))
+      log(color.red(`  Num lines actual ` + linesActual.length))
+    }
     let cActual = ``
     let cExpected = ``
     let expectedLine = ``
@@ -229,7 +233,10 @@ const runCommand = async (test: Test, cwd: string, timeout: number): Promise<voi
       log(``)
       log(color.red(`Extra output found in your program output.`))
       log(``)
-      log(color.red(`Extra output: "` + linesActual[i] + `"`))
+      // print out all extra lines
+      for (; i < linesActual.length; i++) {
+        log(color.red(`Extra output: "` + linesActual[i] + `"`))
+      }
     }
   }
 

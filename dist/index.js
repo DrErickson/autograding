@@ -12605,19 +12605,26 @@ const runCommand = async (test, cwd, timeout) => {
     const expected = normalizeLineEndings(test.output || '');
     const actual = normalizeLineEndings(output);
     const diffMessage = (actual, expected) => {
-        let linesActual = actual.split(/\r?\n/);
-        let linesExpected = expected.split(/\r?\n/);
-        let minLines = Math.min(linesActual.length, linesExpected.length);
+        const linesActual = actual.split(/\r?\n/);
+        const linesExpected = expected.split(/\r?\n/);
+        const minLines = Math.min(linesActual.length, linesExpected.length);
         log(``);
-        log(`Num lines expected ` + linesExpected.length);
-        log(`  Num lines actual ` + linesActual.length);
+        if (linesExpected.length == linesActual.length) {
+            log(color.green(`Num lines expected ` + linesExpected.length));
+            log(color.green(`  Num lines actual ` + linesActual.length));
+        }
+        else {
+            log(color.red(`Num lines expected ` + linesExpected.length));
+            log(color.red(`  Num lines actual ` + linesActual.length));
+        }
         let cActual = ``;
         let cExpected = ``;
         let expectedLine = ``;
         let actualLine = ``;
         log(``);
         // Look at each line
-        for (var i = 0; i < minLines; i++) {
+        let i;
+        for (i = 0; i < minLines; i++) {
             expectedLine = linesExpected[i];
             actualLine = linesActual[i];
             if (actualLine == expectedLine) {
@@ -12637,7 +12644,7 @@ const runCommand = async (test, cwd, timeout) => {
                         diff[j] = `_`;
                     }
                 }
-                let diffLine = diff.join('');
+                const diffLine = diff.join('');
                 log(``);
                 log(color.red(`EXPECTED: "` + expectedLine + `"`));
                 log(color.red(`  ACTUAL: "` + actualLine + `"`));
@@ -12664,7 +12671,10 @@ const runCommand = async (test, cwd, timeout) => {
             log(``);
             log(color.red(`Extra output found in your program output.`));
             log(``);
-            log(color.red(`Extra output: "` + linesActual[i] + `"`));
+            // print out all extra lines
+            for (; i < linesActual.length; i++) {
+                log(color.red(`Extra output: "` + linesActual[i] + `"`));
+            }
         }
     };
     switch (test.comparison) {
@@ -12684,7 +12694,9 @@ const runCommand = async (test, cwd, timeout) => {
         default:
             // The default comparison mode is 'included'
             if (!actual.includes(expected)) {
-                throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual);
+                diffMessage(actual, expected);
+                throw new TestError(`Output does not match`);
+                // throw new TestOutputError(`The output for test ${test.name} did not match`, expected, actual)
             }
             break;
     }
