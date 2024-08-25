@@ -1,8 +1,10 @@
-# stevenbitner/autograding
-![CI Build](https://github.com/stevenbitner/autograding/actions/workflows/ci.yml/badge.svg)
+# DrErickson/autograding
 
-- This repo is forked from https://github.com/education/autograding/.
-- The source repository has not been updated in a long time, so I'm hoping to fix a few issues in this repo.
+- This repo is forked from https://github.com/stevenbitner/autograding which in turn was forked from https://github.com/education/autograding/.
+- Many thanks to Steven for fixing the original autograder which has since been abandoned.
+- I may make this a separate project in the future, but for now, I will keep this as a fork
+- One major improvement is adding a "diff" feature to the autograder output.  This allows students to see exactly what did not match.
+- As long as I continue to use this autograder, I will continue to update the various libraries and actions as required.
 
 ## Basic Usage
 The autograder is a GitHub Action that must be triggered as part of a CI workflow.
