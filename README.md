@@ -2,7 +2,7 @@
 
 - This repo is forked from https://github.com/stevenbitner/autograding which in turn was forked from https://github.com/education/autograding/.
 - Many thanks to Steven for fixing the original autograder which has since been abandoned.
-- I may make this a separate project in the future, but for now, I will keep this as a fork
+- I may make this a separate project in the future, but for now, I will keep this as a fork.
 - One major improvement is adding a "diff" feature to the autograder output.  This allows students to see exactly what did not match.
 - As long as I continue to use this autograder, I will continue to update the various libraries and actions as required.
 
@@ -13,7 +13,7 @@ An example [.github](resources/.github) directory is included in the [resources]
 
 ### Either/or
 If you set up tests in [GithHub Classroom](https://classroom.github.com) when creating the assignment, it will overwrite the configuration files described below.
-As such, if you are going through any part of the process from this action repository, **don not** add tests in the web interface when creating the assignment.
+As such, if you are going through any part of the process from this action repository, **do not** add tests in the web interface when creating the assignment.
 
 ### TLDR
 - Copy the .github directory (contained in [resources](resources)) to the top level of the repository to be graded.
